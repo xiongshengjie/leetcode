@@ -2,29 +2,33 @@ package cn.xcloude.leetcode;
 
 public class MinimumWindowSubstring {
   public String minWindow(String S, String T) {
-    if (S == null || T == null) {
-      return "";
+    int[] count = new int[128];
+    for (int i = 0; i < T.length(); i++) {
+      count[T.charAt(i)]++;
     }
 
-    int windowLength = T.length();
-    for (int i = 0; i < S.length() - windowLength; i++) {
-      for (int j = windowLength; j < S.length(); j++) {
-        String temp = S.substring(i, i + j);
-        for (int position = 0; position < windowLength; position++) {
-          if (temp.contains(T.substring(position, position + 1))) {
-            if (position == windowLength - 1) {
-              return temp;
-            }
-          }
-          break;
+    int begin = 0, end = 0, windowLength = Integer.MAX_VALUE, counter = T.length(), head = 0;
+    while (end < S.length()) {
+      if (count[S.charAt(end++)]-- > 0) {
+        counter--;
+      }
+
+      while (counter == 0) {
+        if (windowLength > end - begin) {
+          head = begin;
+          windowLength = end - begin;
         }
+        if (count[S.charAt(begin++)]++ == 0) {
+          counter++;
+        }
+
       }
     }
-    return "";
+    return windowLength == Integer.MAX_VALUE ? "" : S.substring(head, head + windowLength);
   }
 
   public static void main(String[] args) {
-    String s = "ABCC",t="BC";
-    new MinimumWindowSubstring().minWindow(s,t);
+    String s = "a", t = "b";
+    new MinimumWindowSubstring().minWindow(s, t);
   }
 }
