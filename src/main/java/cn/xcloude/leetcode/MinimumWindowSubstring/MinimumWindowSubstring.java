@@ -1,4 +1,4 @@
-package cn.xcloude.leetcode;
+package cn.xcloude.leetcode.MinimumWindowSubstring;
 
 public class MinimumWindowSubstring {
   public String minWindow(String S, String T) {

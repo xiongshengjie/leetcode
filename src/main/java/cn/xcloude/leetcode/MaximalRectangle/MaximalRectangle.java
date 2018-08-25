@@ -1,4 +1,4 @@
-package cn.xcloude.leetcode;
+package cn.xcloude.leetcode.MaximalRectangle;
 
 public class MaximalRectangle {
   public int maximalRectangle(char[][] matrix) {

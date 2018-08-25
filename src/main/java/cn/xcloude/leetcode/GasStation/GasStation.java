@@ -1,4 +1,4 @@
-package cn.xcloude.leetcode;
+package cn.xcloude.leetcode.GasStation;
 
 public class GasStation {
 

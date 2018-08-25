@@ -1,4 +1,4 @@
-package cn.xcloude.leetcode;
+package cn.xcloude.leetcode.MedianOfTwoSortedArrays;
 
 public class MedianOfTwoSortedArrays {
   public double findMedianSortedArrays(int A[], int B[]) {

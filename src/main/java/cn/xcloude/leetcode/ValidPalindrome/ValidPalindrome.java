@@ -1,4 +1,4 @@
-package cn.xcloude.leetcode;
+package cn.xcloude.leetcode.ValidPalindrome;
 
 public class ValidPalindrome {
   public boolean isPalindrome(String s) {

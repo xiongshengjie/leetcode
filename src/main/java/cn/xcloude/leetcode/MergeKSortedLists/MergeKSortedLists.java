@@ -1,8 +1,8 @@
-package cn.xcloude.leetcode;
+package cn.xcloude.leetcode.MergeKSortedLists;
 
 import java.util.ArrayList;
 
-/*class ListNode {
+class ListNode {
   int val;
   ListNode next;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
     val = x;
     next = null;
   }
-}*/
+}
 
 public class MergeKSortedLists {
   public ListNode mergeKLists(ArrayList<ListNode> lists) {
