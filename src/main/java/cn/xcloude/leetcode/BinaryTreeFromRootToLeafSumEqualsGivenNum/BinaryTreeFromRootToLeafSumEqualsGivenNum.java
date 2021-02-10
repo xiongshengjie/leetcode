@@ -23,7 +23,7 @@ class TreeNode {
 }
 
 /**
- * LC 113
+ * LC37
  * 二叉树根节点到叶子节点和为指定值的路径
  */
 public class BinaryTreeFromRootToLeafSumEqualsGivenNum {
