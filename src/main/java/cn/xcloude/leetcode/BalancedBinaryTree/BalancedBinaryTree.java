@@ -12,20 +12,29 @@ class TreeNode {
  */
 public class BalancedBinaryTree {
   public boolean isBalanced(TreeNode root) {
-    if (root == null) {
-      return true;
-    }
-
-    return Math.abs(depth(root.left, 0) - depth(root.right, 0)) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+    return depth(root) != -1;
   }
 
-  private int depth(TreeNode root, int depth) {
+  private int depth(TreeNode root) {
     if (root == null) {
-      return depth;
+      return 0;
     }
 
-    depth++;
-    return Math.max(depth(root.left, depth), depth(root.right, depth));
+    int left = depth(root.left);
+    if (left == -1) {
+      return -1;
+    }
+
+    int right = depth(root.right);
+    if (right == -1) {
+      return -1;
+    }
+
+    if (Math.abs(left - right) > 1) {
+      return -1;
+    }
+
+    return Math.max(left, right) + 1;
   }
 
   public static void main(String[] args) {
