@@ -10,6 +10,10 @@ class TreeNode {
   }
 }
 
+/**
+ * LC41
+ * 将升序数组转化为平衡二叉搜索树
+ */
 public class ConvertSortedArrayToBinarySearchTree {
   public TreeNode sortedArrayToBST(int[] num) {
     return sortedArrayToBST(num, 0, num.length - 1);

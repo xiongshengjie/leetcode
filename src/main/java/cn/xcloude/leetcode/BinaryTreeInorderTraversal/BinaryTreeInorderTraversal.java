@@ -13,6 +13,10 @@ class TreeNode {
   }
 }
 
+/**
+ * LC55
+ * 二叉树的中序遍历
+ */
 public class BinaryTreeInorderTraversal {
   public ArrayList<Integer> inorderTraversal(TreeNode root) {
     ArrayList<Integer> result = new ArrayList<>();
