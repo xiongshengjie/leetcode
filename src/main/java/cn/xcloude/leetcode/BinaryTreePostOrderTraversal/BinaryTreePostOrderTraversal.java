@@ -14,6 +14,10 @@ class TreeNode {
   }
 }
 
+/**
+ * LC6
+ * 二叉树的后序遍历
+ */
 public class BinaryTreePostOrderTraversal {
   public ArrayList<Integer> postOrderTraversal(TreeNode root) {
     ArrayList<Integer> result = new ArrayList<>();
