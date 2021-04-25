@@ -1,5 +1,9 @@
 package cn.xcloude.leetcode;
 
+/**
+ * LC43
+ * 从中序和后序遍历构造二叉树
+ */
 public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
   public TreeNode buildTree(int[] inorder, int[] postorder) {
     return buildTree(inorder, postorder, 0, inorder.length - 1, 0, postorder.length - 1);
