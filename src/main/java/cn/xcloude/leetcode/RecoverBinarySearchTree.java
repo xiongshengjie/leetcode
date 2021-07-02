@@ -8,7 +8,8 @@ public class RecoverBinarySearchTree {
 
   public void recoverTree(TreeNode root) {
     // recoverTreeRecursion(root);
-    recoverTreeIteratively(root);
+    // recoverTreeIteratively(root);
+    recoverTreeMorris(root);
   }
 
   // 递归实现
@@ -80,13 +81,60 @@ public class RecoverBinarySearchTree {
     swap(preWrong, lastWrong);
   }
 
+  // Morris 遍历实现
+  private void recoverTreeMorris(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+
+    // morris 遍历使用
+    TreeNode temp, current = root;
+    // 找错误节点使用
+    TreeNode preNode = null, preWrong = null, lastWrong = null;
+    while (current != null) {
+      if (current.left == null) {
+        if (preNode != null && preNode.val > current.val) {
+          if (preWrong == null) {
+            preWrong = preNode;
+          }
+          lastWrong = current;
+        }
+        preNode = current;
+
+        current = current.right;
+      } else {
+        temp = current.left;
+        while (temp.right != null && temp.right != current) {
+          temp = temp.right;
+        }
+
+        if (temp.right == null) {
+          temp.right = current;
+          current = current.left;
+        } else {
+          if (preNode != null && preNode.val > current.val) {
+            if (preWrong == null) {
+              preWrong = preNode;
+            }
+            lastWrong = current;
+          }
+          preNode = current;
+
+          temp.right = null;
+          current = current.right;
+        }
+      }
+    }
+
+    swap(preWrong, lastWrong);
+  }
+
   public static void main(String[] args) {
     TreeNode root = new TreeNode(1);
-    TreeNode left = new TreeNode(3);
-    TreeNode right = new TreeNode(2);
-
-    root.left = left;
-    left.right = right;
+    TreeNode n2 = new TreeNode(2);
+    TreeNode n3 = new TreeNode(3);
+    root.left = n3;
+    n3.right = n2;
     new RecoverBinarySearchTree().recoverTree(root);
   }
 }
