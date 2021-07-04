@@ -3,6 +3,10 @@ package cn.xcloude.leetcode;
 import java.util.Deque;
 import java.util.LinkedList;
 
+/**
+ * LC50
+ * 恢复二叉搜索树
+ */
 public class RecoverBinarySearchTree {
   private TreeNode preNode, preWrong, lastWrong;
 
