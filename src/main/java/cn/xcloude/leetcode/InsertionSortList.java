@@ -1,7 +1,8 @@
 package cn.xcloude.leetcode;
 
 /**
- * LC5 链表的插入排序
+ * LC5
+ * 链表的插入排序
  */
 public class InsertionSortList {
   public ListNode insertionSortList(ListNode head) {
