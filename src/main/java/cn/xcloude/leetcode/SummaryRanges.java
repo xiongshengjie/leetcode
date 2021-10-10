@@ -15,7 +15,7 @@ public class SummaryRanges {
   }
 
   public void addNum(int val) {
-    Map.Entry<Integer, Integer> firstGreaterEntry = start2End.ceilingEntry(val + 1);
+    Map.Entry<Integer, Integer> firstGreaterEntry = start2End.ceilingEntry(val);
     Map.Entry<Integer, Integer> lastLowerEntry = start2End.floorEntry(val);
     if (lastLowerEntry != null && lastLowerEntry.getValue() >= val) {
       return;
