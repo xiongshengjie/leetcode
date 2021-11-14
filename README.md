@@ -1,2 +1,2 @@
 # leetcode
-* 牛客网leetcode刷题记录
+* 牛客网、leetcode 刷题记录
