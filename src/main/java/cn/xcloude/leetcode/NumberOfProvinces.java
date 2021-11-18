@@ -1,5 +1,7 @@
 package cn.xcloude.leetcode;
 
+import java.util.Arrays;
+
 /**
  * leetcode 547
  * 省份数量
@@ -30,31 +32,49 @@ public class NumberOfProvinces {
     return result;
   }
 
-  private static class UnionFind {
+  static class UnionFind {
     private final int[] parent;
+    private final int[] weight;
 
-    private UnionFind(int size) {
+    UnionFind(int size) {
       this.parent = new int[size];
+      this.weight = new int[size];
+      Arrays.fill(weight, 1);
       for (int index = 0; index < size; ++index) {
         parent[index] = index;
       }
     }
 
-    private int find(int element) {
-      while (parent[element] != element) {
-        parent[element] = parent[parent[element]];
-        element = parent[element];
+    int find(int element) {
+      int root = element;
+      while (parent[root] != root) {
+        root = parent[root];
       }
 
-      return element;
+      while (parent[element] != element) {
+        int temp = parent[element];
+        parent[element] = root;
+        element = temp;
+      }
+
+      return root;
     }
 
-    private void union(int element, int otherElement) {
+    boolean union(int element, int otherElement) {
       int parent = find(element);
       int otherParent = find(otherElement);
-      if (parent != otherParent) {
-        this.parent[otherParent] = parent;
+      if (parent == otherParent) {
+        return false;
       }
+
+      if (weight[parent] < weight[otherParent]) {
+        this.parent[parent] = otherParent;
+        weight[parent] += weight[otherParent];
+      } else {
+        this.parent[otherParent] = parent;
+        weight[otherElement] += weight[parent];
+      }
+      return true;
     }
   }
 }
