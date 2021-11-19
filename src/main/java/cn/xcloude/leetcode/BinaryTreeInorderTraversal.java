@@ -1,10 +1,12 @@
 package cn.xcloude.leetcode;
 
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * LC55
+ * leetcode 94
  * 二叉树的中序遍历
  */
 public class BinaryTreeInorderTraversal {
@@ -31,17 +33,17 @@ public class BinaryTreeInorderTraversal {
       return;
     }
 
-    Stack<TreeNode> stack = new Stack<>();
+    Deque<TreeNode> stack = new LinkedList<>();
     TreeNode node = root;
     while (node != null || !stack.isEmpty()) {
-      if (node != null) {
+      while (node != null) {
         stack.push(node);
         node = node.left;
-      } else {
-        node = stack.pop();
-        result.add(node.val);
-        node = node.right;
       }
+
+      node = stack.pop();
+      result.add(node.val);
+      node = node.right;
     }
   }
 
