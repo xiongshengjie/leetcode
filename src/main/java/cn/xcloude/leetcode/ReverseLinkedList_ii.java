@@ -1,25 +1,52 @@
 package cn.xcloude.leetcode;
 
+/**
+ * leetcode 92
+ * 反转链表 II
+ */
 public class ReverseLinkedList_ii {
-  public ListNode reverseBetween(ListNode head, int m, int n) {
-    if (head == null) {
-      return null;
-    }
-    ListNode mListNode = head, mLast = null, newHead = new ListNode(0);
-    mLast = newHead;
-    newHead.next = head;
-    for (int i = 1; i < m; i++) {
-      mLast = mListNode;
-      mListNode = mListNode.next;
+  public ListNode reverseBetween(ListNode head, int left, int right) {
+    // return reverse(head, left, right);
+    return reverseRecursion(head, left, right, 1);
+  }
+
+  private ListNode reverse(ListNode head, int left, int right) {
+    int index = 1;
+    ListNode reverseHead = null, dummy = new ListNode(0, head),
+        leftLast = dummy, reverseTail = head;
+    while (head != null && index <= right) {
+      if (index < left) {
+        leftLast = leftLast.next;
+        head = head.next;
+        reverseTail = head;
+      } else if (index <= right) {
+        ListNode next = head.next;
+        head.next = reverseHead;
+        reverseHead = head;
+        head = next;
+      }
+      ++index;
     }
 
-    for (int i = 0; i < n - m; i++) {
-      ListNode temp = mListNode.next;
-      mListNode.next = temp.next;
-      temp.next = mLast.next;
-      mLast.next = temp;
+    leftLast.next = reverseHead;
+    reverseTail.next = head;
+    return dummy.next;
+  }
+
+  private ListNode reverseRecursion(ListNode node, int left, int right, int index) {
+    if (index >= right || node == null || node.next == null) {
+      return node;
     }
 
-    return newHead.next;
+    if (index < left) {
+      node.next = reverseRecursion(node.next, left, right, index + 1);
+      return node;
+    } else {
+      ListNode head = reverseRecursion(node.next, left, right, index + 1);
+      ListNode next = node.next.next;
+      node.next.next = node;
+      node.next = next;
+      return head;
+    }
   }
 }
