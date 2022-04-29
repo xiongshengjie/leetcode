@@ -13,7 +13,7 @@ public class MedianOfTwoSortedArrays {
   // 二分查找
   private double findMedianSortedArraysBinarySearch(int[] nums1, int[] nums2) {
     if (nums1.length > nums2.length) {
-      return findMedianSortedArrays(nums2, nums1);
+      return findMedianSortedArraysBinarySearch(nums2, nums1);
     }
 
     int m = nums1.length;
