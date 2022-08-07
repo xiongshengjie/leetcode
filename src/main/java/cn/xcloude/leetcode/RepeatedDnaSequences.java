@@ -1,7 +1,9 @@
 package cn.xcloude.leetcode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +13,8 @@ import java.util.Map;
  */
 public class RepeatedDnaSequences {
   private static final int SUBSTRING_LENGTH = 10;
-  private static final Map<Character, Integer> char2Int = new HashMap<Character, Integer>() {{
-    put('A', 0);
-    put('C', 1);
-    put('G', 2);
-    put('T', 3);
-  }};
+  private static final int MASK = 0xFFFFF;
+  private static final Map<Character, Integer> char2Code = Map.of('A', 0, 'C', 1, 'G', 2, 'T', 3);
 
   public List<String> findRepeatedDnaSequences(String s) {
     // return findRepeatedDnaSequencesSubstring(s);
@@ -25,26 +23,27 @@ public class RepeatedDnaSequences {
 
   // Hash 表 + 位运算
   private List<String> findRepeatedDnaSequencesBit(String s) {
-    List<String> result = new ArrayList<>();
-    int length = s.length();
-    if (length <= SUBSTRING_LENGTH) {
-      return result;
+    if (s.length() <= SUBSTRING_LENGTH) {
+      return Collections.emptyList();
     }
 
-    int window = 0;
-    for (int index = 0; index < SUBSTRING_LENGTH - 1; ++index) {
-      window = (window << 2) | char2Int.get(s.charAt(index));
+    int hashCode = 0;
+    for (int index = 0; index < SUBSTRING_LENGTH; ++index) {
+      hashCode = (hashCode << 2) | char2Code.get(s.charAt(index));
     }
 
-    Map<Integer, Integer> window2Count = new HashMap<>();
-    for (int index = 0; index <= length - SUBSTRING_LENGTH; ++index) {
-      window = ((window << 2) | char2Int.get(s.charAt(index + SUBSTRING_LENGTH - 1)))
-          & ((1 << (SUBSTRING_LENGTH * 2)) - 1);
-      Integer count = window2Count.getOrDefault(window, 0);
-      ++count;
-      window2Count.put(window, count);
-      if (count == 2) {
+    List<String> result = new LinkedList<>();
+    Map<Integer, Integer> hashCode2Count = new HashMap<>(s.length() - SUBSTRING_LENGTH + 1);
+    hashCode2Count.put(hashCode, 1);
+    for (int index = 1; index <= s.length() - SUBSTRING_LENGTH; ++index) {
+      hashCode = ((hashCode << 2) | char2Code.get(s.charAt(index + SUBSTRING_LENGTH - 1))) & MASK;
+      Integer count = hashCode2Count.get(hashCode);
+
+      if (count == null) {
+        hashCode2Count.put(hashCode, 1);
+      } else if (count == 1) {
         result.add(s.substring(index, index + SUBSTRING_LENGTH));
+        hashCode2Count.put(hashCode, 2);
       }
     }
 
