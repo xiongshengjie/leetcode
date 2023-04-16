@@ -16,12 +16,12 @@ public class SlidingWindowMaximum {
     }
 
     int[] result = new int[nums.length - k + 1];
-    result[0] = nums[deque.peekFirst()];
+    result[0] = nums[deque.getFirst()];
     for (int index = k; index < nums.length; ++index) {
       reduce(deque, index - k);
       expand(nums, deque, index);
 
-      result[index - k + 1] = nums[deque.peekFirst()];
+      result[index - k + 1] = nums[deque.getFirst()];
     }
 
     return result;
