@@ -1,7 +1,8 @@
 package cn.xcloude.leetcode;
 
 /**
- * LC39
+ * leetcode 110
+ * nowcoder JZ79
  * 判断二叉树是否为平衡二叉树
  */
 public class BalancedBinaryTree {
@@ -29,17 +30,5 @@ public class BalancedBinaryTree {
     }
 
     return Math.max(left, right) + 1;
-  }
-
-  public static void main(String[] args) {
-    TreeNode root = new TreeNode();
-    root.val = 1;
-
-    TreeNode left = new TreeNode();
-    left.val = 2;
-
-    root.left = left;
-    boolean result = new BalancedBinaryTree().isBalanced(root);
-    System.out.println(result);
   }
 }
