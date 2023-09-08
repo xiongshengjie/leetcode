@@ -5,7 +5,7 @@ import java.util.Queue;
 
 /**
  * leetcode 101
- * JZ28
+ * nowcoder JZ28
  * 判断二叉树是否对称
  */
 public class SymmetricTree {
