@@ -4,7 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * LC48
+ * leetcode 101
+ * JZ28
  * 判断二叉树是否对称
  */
 public class SymmetricTree {
