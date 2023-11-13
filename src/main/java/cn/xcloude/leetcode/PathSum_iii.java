@@ -3,6 +3,11 @@ package cn.xcloude.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * leetcode 437
+ * nowcoder JZ84
+ * 路径总和 III
+ */
 public class PathSum_iii {
   public int pathSum(TreeNode root, int targetSum) {
     // return traversal(root, targetSum);
@@ -48,9 +53,8 @@ public class PathSum_iii {
       return 0;
     }
 
-    boolean equals = node.val == targetSum;
-    targetSum -= node.val;
-    int result = pathSum0(node.left, targetSum) + pathSum0(node.right, targetSum);
-    return equals ? result + 1 : result;
+    int result = pathSum0(node.left, targetSum - node.val)
+        + pathSum0(node.right, targetSum - node.val);
+    return node.val == targetSum ? result + 1 : result;
   }
 }
